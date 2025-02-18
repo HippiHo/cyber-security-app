@@ -1,37 +1,29 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import { useFetch } from "./hooks/useFetch";
+import { getReadableTime } from "./utils/getTime";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const { data, isPending, error } = useFetch(
+    "https://front.heyering.com/detections?page=1&limit=50",
+    {
+      headers: {
+        Authorization: import.meta.env.VITE_API_KEY,
+      },
+    }
+  );
 
   return (
-    <>
-      <div>
-        <h1 className="text-3xl font-bold underline text-red-400">
-          Hello world!
-        </h1>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="App flex items-center justify-center flex-col m-8">
+      <h1 className="font-bold text-2xl">Detections</h1>
+      {isPending && <div className="text-gray-500">Loading....</div>}
+      {error && <div className="text-red-600">{error}</div>}
+      {data &&
+        data.map((detection) => (
+          <p className="" key={detection.title}>
+            <b>{detection.title}</b> was triggered:{" "}
+            <b>{getReadableTime(detection.triggeredAt)}</b>
+          </p>
+        ))}
+    </div>
   );
 }
 
