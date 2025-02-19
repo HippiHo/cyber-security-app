@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 // needs props validation (later I would propably use TypeScript anyways)
+// this list looks more like a table to me
 
 const List = ({ data }) => {
   const columns = useMemo(

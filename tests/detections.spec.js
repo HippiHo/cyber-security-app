@@ -1,6 +1,8 @@
 // @ts-check
 
-// npx playwright test
+// run npx playwright test
+// these tests don't work yet.
+//  I assume there is something to be set up more in the playwright.config and package.json
 
 import { test, expect } from "@playwright/test";
 

@@ -1,4 +1,6 @@
 // needs props validation (we propably use TypeScript anyways)
+// with more time there could be a better filter ui and the search needs to be added still
+// there should propably be the option to combine these filters - which is not working yet
 
 const Filter = ({ getFilteredData }) => {
   return (

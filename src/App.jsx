@@ -7,6 +7,8 @@ import { useState } from "react";
 function App() {
   const [filteredData, setFilteredData] = useState([]);
 
+  // eventually there should be a way to limit or paginate the data
+
   const { data, isPending, error } = useFetch(
     "https://front.heyering.com/detections?page=1&limit=40",
     {
